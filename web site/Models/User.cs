@@ -7,16 +7,12 @@ using System.Web;
 
 namespace web_site.Models
 {
-    public class Assignment
+    public class User
     {
         [Key]
-        [Column(Order = 1)]
-        int TaskID { get; set; }
-        [Key]
-        [Column(Order = 2)]
         int UserID { get; set; }
+        String FirstName { get; set; }
+        String LastName { get; set; }
 
-        public virtual Task Task { get; set; }
-        public virtual User User { get; set; }
     }
 }

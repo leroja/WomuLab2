@@ -7,16 +7,13 @@ using System.Web;
 
 namespace web_site.Models
 {
-    public class Assignment
+    public class Task
     {
-        [Key]
-        [Column(Order = 1)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         int TaskID { get; set; }
-        [Key]
-        [Column(Order = 2)]
-        int UserID { get; set; }
-
-        public virtual Task Task { get; set; }
-        public virtual User User { get; set; }
+        DateTime BeginDateTime { get; set; }
+        DateTime DeadlineDateTime { get; set; }
+        String Title { get; set; }
+        String Requirements { get; set; }
     }
 }
