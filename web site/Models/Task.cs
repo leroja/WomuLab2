@@ -10,10 +10,10 @@ namespace web_site.Models
     public class Task
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        int TaskID { get; set; }
-        DateTime BeginDateTime { get; set; }
-        DateTime DeadlineDateTime { get; set; }
-        String Title { get; set; }
-        String Requirements { get; set; }
+        public int TaskID { get; set; }
+        public DateTime BeginDateTime { get; set; }
+        public DateTime DeadlineDateTime { get; set; }
+        public String Title { get; set; }
+        public String Requirements { get; set; }
     }
 }

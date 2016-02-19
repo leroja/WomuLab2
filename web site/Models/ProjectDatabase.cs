@@ -6,7 +6,7 @@ using System.Web;
 
 namespace web_site.Models
 {
-    public class Database : DbContext
+    public class ProjectDatabase : DbContext
     {
 
         public DbSet<User> Users { get; set; }

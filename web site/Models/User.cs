@@ -9,9 +9,9 @@ namespace web_site.Models
 {
     public class User
     {
-        int UserID { get; set; }
-        String FirstName { get; set; }
-        String LastName { get; set; }
+        public int UserID { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
 
     }
 }

@@ -11,10 +11,10 @@ namespace web_site.Models
     {
         [Key]
         [Column(Order = 1)]
-        int TaskID { get; set; }
+        public int TaskID { get; set; }
         [Key]
         [Column(Order = 2)]
-        int UserID { get; set; }
+        public int UserID { get; set; }
 
         public virtual Task Task { get; set; }
         public virtual User User { get; set; }
