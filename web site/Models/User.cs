@@ -9,7 +9,6 @@ namespace web_site.Models
 {
     public class User
     {
-        [Key]
         int UserID { get; set; }
         String FirstName { get; set; }
         String LastName { get; set; }
