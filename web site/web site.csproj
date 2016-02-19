@@ -183,10 +183,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="bin\Controllers\AssignmentsController.cs" />
-    <Compile Include="bin\Controllers\HomeController.cs" />
-    <Compile Include="bin\Controllers\TasksController.cs" />
-    <Compile Include="bin\Controllers\UsersController.cs" />
+    <Compile Include="Controllers\AssignmentsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TasksController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -240,7 +240,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="bin\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201602191247118_initial.resx">
       <DependentUpon>201602191247118_initial.cs</DependentUpon>
