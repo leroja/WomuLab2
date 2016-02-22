@@ -16,12 +16,19 @@ namespace web_site.Controllers
     {
         private ProjectDatabase db = new ProjectDatabase();
 
+        /// <summary>
+        /// Gets the tasks from the server.
+        /// </summary>
         // GET: api/Tasks
         public IQueryable<Task> GetTasks()
         {
             return db.Tasks;
         }
 
+        /// <summary>
+        /// Looks up some task by ID.
+        /// </summary>
+        /// <param name="id">The ID of the task.</param>
         // GET: api/Tasks/5
         [ResponseType(typeof(Task))]
         public IHttpActionResult GetTask(int id)
@@ -35,6 +42,13 @@ namespace web_site.Controllers
             return Ok(task);
         }
 
+        /// <summary>
+        /// Update an existing task.
+        /// </summary>
+        /// <param name="id">ID Of the task</param>
+        /// <param name="task">
+        /// task info
+        /// </param>
         // PUT: api/Tasks/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTask(int id, Task task)
@@ -70,6 +84,12 @@ namespace web_site.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Create a new task
+        /// </summary>
+        /// <param name="task">
+        /// 
+        /// </param>
         // POST: api/Tasks
         [ResponseType(typeof(Task))]
         public IHttpActionResult PostTask(Task task)
@@ -85,6 +105,12 @@ namespace web_site.Controllers
             return CreatedAtRoute("DefaultApi", new { id = task.TaskID }, task);
         }
 
+        /// <summary>
+        /// Delete an task
+        /// </summary>
+        /// <param name="id">
+        /// ID of task
+        /// </param>
         // DELETE: api/Tasks/5
         [ResponseType(typeof(Task))]
         public IHttpActionResult DeleteTask(int id)

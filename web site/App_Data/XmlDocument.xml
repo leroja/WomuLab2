@@ -481,11 +481,113 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:web_site.Controllers.AssignmentsController.GetAssignments">
+            <summary>
+            Gets the assigments from the server.
+            </summary>
+        </member>
+        <member name="M:web_site.Controllers.AssignmentsController.GetAssignment(System.Int32)">
+            <summary>
+            Looks up some Assignment by ID.
+            </summary>
+            <param name="id">The ID of the assignment.</param>
+        </member>
+        <member name="M:web_site.Controllers.AssignmentsController.PutAssignment(System.Int32,web_site.Models.Assignment)">
+            <summary>
+            Update an existing assignment.
+            </summary>
+            <param name="id">ID Of the assignment</param>
+            <param name="assignment">
+            assigment info
+            </param>
+        </member>
+        <member name="M:web_site.Controllers.AssignmentsController.PostAssignment(web_site.Models.Assignment)">
+            <summary>
+            Create a new assignment
+            </summary>
+            <param name="assignment">
+            
+            </param>
+        </member>
+        <member name="M:web_site.Controllers.AssignmentsController.DeleteAssignment(System.Int32)">
+            <summary>
+            Delete an assignment
+            </summary>
+            <param name="id">
+            ID of assignment
+            </param>
+        </member>
+        <member name="M:web_site.Controllers.TasksController.GetTasks">
+            <summary>
+            Gets the tasks from the server.
+            </summary>
+        </member>
+        <member name="M:web_site.Controllers.TasksController.GetTask(System.Int32)">
+            <summary>
+            Looks up some task by ID.
+            </summary>
+            <param name="id">The ID of the task.</param>
+        </member>
+        <member name="M:web_site.Controllers.TasksController.PutTask(System.Int32,web_site.Models.Task)">
+            <summary>
+            Update an existing task.
+            </summary>
+            <param name="id">ID Of the task</param>
+            <param name="task">
+            task info
+            </param>
+        </member>
+        <member name="M:web_site.Controllers.TasksController.PostTask(web_site.Models.Task)">
+            <summary>
+            Create a new task
+            </summary>
+            <param name="task">
+            
+            </param>
+        </member>
+        <member name="M:web_site.Controllers.TasksController.DeleteTask(System.Int32)">
+            <summary>
+            Delete an task
+            </summary>
+            <param name="id">
+            ID of task
+            </param>
+        </member>
+        <member name="M:web_site.Controllers.UsersController.GetUsers">
+            <summary>
+            Gets the users from the server.
+            </summary>
+        </member>
         <member name="M:web_site.Controllers.UsersController.GetUser(System.Int32)">
             <summary>
             Looks up some User by ID.
             </summary>
             <param name="id">The ID of the User.</param>
+        </member>
+        <member name="M:web_site.Controllers.UsersController.PutUser(System.Int32,web_site.Models.User)">
+            <summary>
+            Update an existing User.
+            </summary>
+            <param name="id">ID Of the user</param>
+            <param name="user">
+            User info
+            </param>
+        </member>
+        <member name="M:web_site.Controllers.UsersController.PostUser(web_site.Models.User)">
+            <summary>
+            Create a new User
+            </summary>
+            <param name="user">
+            
+            </param>
+        </member>
+        <member name="M:web_site.Controllers.UsersController.DeleteUser(System.Int32)">
+            <summary>
+            Delete an User
+            </summary>
+            <param name="id">
+            ID of User
+            </param>
         </member>
     </members>
 </doc>

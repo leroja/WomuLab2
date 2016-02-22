@@ -16,6 +16,7 @@ namespace web_site.Models
         [Column(Order = 2)]
         public int UserID { get; set; }
 
+        
         public virtual Task Task { get; set; }
         public virtual User User { get; set; }
     }
