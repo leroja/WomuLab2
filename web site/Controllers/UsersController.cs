@@ -16,6 +16,9 @@ namespace web_site.Controllers
     {
         private ProjectDatabase db = new ProjectDatabase();
 
+        /// <summary>
+        /// Gets the users from the server.
+        /// </summary>
         // GET: api/Users
         public IQueryable<User> GetUsers()
         {
@@ -38,7 +41,13 @@ namespace web_site.Controllers
 
             return Ok(user);
         }
-
+        /// <summary>
+        /// Update an existing User.
+        /// </summary>
+        /// <param name="id">ID Of the user</param>
+        /// <param name="user">
+        /// User info
+        /// </param>
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUser(int id, User user)
@@ -73,7 +82,12 @@ namespace web_site.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        /// <summary>
+        /// Create a new User
+        /// </summary>
+        /// <param name="user">
+        /// 
+        /// </param>
         // POST: api/Users
         [ResponseType(typeof(User))]
         public IHttpActionResult PostUser(User user)
@@ -89,6 +103,12 @@ namespace web_site.Controllers
             return CreatedAtRoute("DefaultApi", new { id = user.UserID }, user);
         }
 
+        /// <summary>
+        /// Delete an User
+        /// </summary>
+        /// <param name="id">
+        /// ID of User
+        /// </param>
         // DELETE: api/Users/5
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(int id)
