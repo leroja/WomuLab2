@@ -486,17 +486,28 @@
             Gets the assigments from the server.
             </summary>
         </member>
-        <member name="M:web_site.Controllers.AssignmentsController.GetAssignment(System.Int32)">
+        <member name="M:web_site.Controllers.AssignmentsController.GetAssignment(System.Int32,System.Int32)">
             <summary>
-            Looks up some Assignment by ID.
+            Looks up some Assignment by TaskID and UserID.
             </summary>
-            <param name="id">The ID of the assignment.</param>
+            <param name="taskID">
+            ID of the associated task
+            </param>
+            <param name="userID">
+            ID of the associated User
+            </param>
+            <returns></returns>
         </member>
-        <member name="M:web_site.Controllers.AssignmentsController.PutAssignment(System.Int32,web_site.Models.Assignment)">
+        <member name="M:web_site.Controllers.AssignmentsController.PutAssignment(System.Int32,System.Int32,web_site.Models.Assignment)">
             <summary>
             Update an existing assignment.
             </summary>
-            <param name="id">ID Of the assignment</param>
+            <param name="taskID">
+            ID of the associated task
+            </param>
+            <param name="userID">
+            ID of the associated User
+            </param>
             <param name="assignment">
             assigment info
             </param>
@@ -506,15 +517,18 @@
             Create a new assignment
             </summary>
             <param name="assignment">
-            
+            assignment info
             </param>
         </member>
-        <member name="M:web_site.Controllers.AssignmentsController.DeleteAssignment(System.Int32)">
+        <member name="M:web_site.Controllers.AssignmentsController.DeleteAssignment(System.Int32,System.Int32)">
             <summary>
             Delete an assignment
             </summary>
-            <param name="id">
-            ID of assignment
+            <param name="taskID">
+            ID of the associated task
+            </param>
+            <param name="userID">
+            ID of the associated User
             </param>
         </member>
         <member name="M:web_site.Controllers.TasksController.GetTasks">

@@ -1,18 +1,63 @@
-﻿@{
+﻿@model IEnumerable<web_site.ViewModels.TaskAsign >
+@*@model IEnumerable<web_site.Models.Task >*@
+
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Home</title>
-</head>
-<body>
-    <div>
-    <h1>Home</h1>
-    </div>
+
     @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)
-</body>
-</html>
+
+<table style="width:50%" align="center">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Requirements
+        </th>
+        <th>
+            Begin Date
+        </th>
+        <th>
+            Deadline
+        </th>
+        <th>
+            User
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Requirements )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeginDateTime )
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeadlineDateTime )
+            </td>
+            <td>
+                @foreach (string s in item.Users)
+                {
+                    <span style="white-space: pre-line">@s</span>                    
+                }
+            </td>
+        </tr>
+    }
+
+</table>
