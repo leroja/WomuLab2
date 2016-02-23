@@ -20,45 +20,85 @@ namespace web_site.Controllers
         /// Gets the assigments from the server.
         /// </summary>
         // GET: api/Assignments
-        public IQueryable<Assignment> GetAssignments()
+        public IQueryable<AssignmentDTO> GetAssignments()
         {
-            return db.Assignments;
+
+
+            var Assignments = from a in db.Assignments
+                        select new AssignmentDTO()
+                        {
+                            TaskID = a.TaskID,
+                            TaskTitle = a.Task.Title,
+                            UserID = a.UserID,
+                            UserForName = a.User.FirstName,
+                            UserLastName = a.User.LastName
+
+                        };
+
+            return Assignments;
+
         }
 
         /// <summary>
-        /// Looks up some Assignment by ID.
+        /// Looks up some Assignment by TaskID and UserID.
         /// </summary>
-        /// <param name="id">The ID of the assignment.</param>
+        /// <param name="taskID">
+        /// ID of the associated task
+        /// </param>
+        /// <param name="userID">
+        /// ID of the associated User
+        /// </param>
+        /// <returns></returns>
+
         // GET: api/Assignments/5
-        [ResponseType(typeof(Assignment))]
-        public IHttpActionResult GetAssignment(int id)
+        [ResponseType(typeof(AssignmentDTO))]
+        public IHttpActionResult GetAssignment(int taskID,int userID)
         {
-            Assignment assignment = db.Assignments.Find(id);
-            if (assignment == null)
+
+            //Assignment assignment = db.Assignments.Find(taskID, userID);
+
+
+            var Ass = db.Assignments.Find(taskID, userID);
+
+            AssignmentDTO assignmentDTO = new AssignmentDTO
+            {
+                TaskID = Ass.TaskID,
+                TaskTitle = Ass.Task.Title,
+                UserID = Ass.UserID,
+                UserForName = Ass.User.FirstName,
+                UserLastName = Ass.User.LastName
+            };
+
+            if (assignmentDTO == null)
             {
                 return NotFound();
             }
 
-            return Ok(assignment);
+            return Ok(assignmentDTO);
         }
 
         /// <summary>
         /// Update an existing assignment.
         /// </summary>
-        /// <param name="id">ID Of the assignment</param>
+        /// <param name="taskID">
+        /// ID of the associated task
+        /// </param>
+        /// <param name="userID">
+        /// ID of the associated User
+        /// </param>
         /// <param name="assignment">
         /// assigment info
         /// </param>
         // PUT: api/Assignments/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAssignment(int id, Assignment assignment)
+        public IHttpActionResult PutAssignment(int taskID, int userID, Assignment assignment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != assignment.TaskID)
+            if (taskID != assignment.TaskID || userID != assignment.UserID)
             {
                 return BadRequest();
             }
@@ -71,7 +111,7 @@ namespace web_site.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AssignmentExists(id))
+                if (!AssignmentExists(taskID, userID))
                 {
                     return NotFound();
                 }
@@ -88,10 +128,10 @@ namespace web_site.Controllers
         /// Create a new assignment
         /// </summary>
         /// <param name="assignment">
-        /// 
+        /// assignment info
         /// </param>
         // POST: api/Assignments
-        [ResponseType(typeof(Assignment))]
+        [ResponseType(typeof(AssignmentDTO))]
         public IHttpActionResult PostAssignment(Assignment assignment)
         {
             if (!ModelState.IsValid)
@@ -107,7 +147,7 @@ namespace web_site.Controllers
             }
             catch (DbUpdateException)
             {
-                if (AssignmentExists(assignment.TaskID))
+                if (AssignmentExists(assignment.TaskID,assignment.UserID))
                 {
                     return Conflict();
                 }
@@ -123,14 +163,17 @@ namespace web_site.Controllers
         /// <summary>
         /// Delete an assignment
         /// </summary>
-        /// <param name="id">
-        /// ID of assignment
+        /// <param name="taskID">
+        /// ID of the associated task
+        /// </param>
+        /// <param name="userID">
+        /// ID of the associated User
         /// </param>
         // DELETE: api/Assignments/5
         [ResponseType(typeof(Assignment))]
-        public IHttpActionResult DeleteAssignment(int id)
+        public IHttpActionResult DeleteAssignment(int taskID,int userID)
         {
-            Assignment assignment = db.Assignments.Find(id);
+            Assignment assignment = db.Assignments.Find(taskID, userID);
             if (assignment == null)
             {
                 return NotFound();
@@ -151,9 +194,9 @@ namespace web_site.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AssignmentExists(int id)
+        private bool AssignmentExists(int taskID, int userID)
         {
-            return db.Assignments.Count(e => e.TaskID == id) > 0;
+            return db.Assignments.Count(e => e.TaskID == taskID && e.UserID == userID) > 0;
         }
     }
 }

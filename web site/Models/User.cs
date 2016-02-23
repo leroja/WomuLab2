@@ -10,8 +10,8 @@ namespace web_site.Models
     public class User
     {
         public int UserID { get; set; }
-        public String FirstName { get; set; }
-        public String LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
     }
 }
