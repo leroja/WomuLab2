@@ -22,6 +22,7 @@ namespace Lab2
     /// </summary>
     sealed partial class App : Application
     {
+        public static Uri BaseUri = new Uri("http://localhost:34472/");
         public static Uri BaseUsersUri = new Uri("http://localhost:34472/api/Users");
         public static Frame RootFrame { get; set; }
         /// <summary>

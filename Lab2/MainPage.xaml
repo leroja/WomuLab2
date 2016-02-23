@@ -8,19 +8,30 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        
-        
-        <StackPanel Margin="0,0,10,0" d:LayoutOverrides="LeftPosition, RightPosition" Height="290" VerticalAlignment="Top">
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap">
-            	<Run Text="Test"/>
-            </TextBlock>
-            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Enter something" RenderTransformOrigin="1.416,-2.253"/>
-            <StackPanel Height="100">
-                <TextBox x:Name="Input" TextWrapping="Wrap" Text="Enter something here:"/>
-                <Button x:Name="Enter_button" Content="enter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="123,0,128,0" Click="Button_Click"/>
-            </StackPanel>
-            <TextBlock x:Name="Output" TextWrapping="Wrap" Text=""/>
-            <ListView x:Name="listView" Height="450"/>
+
+
+        <StackPanel Height="41" VerticalAlignment="Top">
+            <Button x:Name="Enter_button" Content="enter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="123,0,128,0" Click="Button_Click"/>
         </StackPanel>
+        <ListBox Name="taskList" SelectionChanged="taskList_SelectionChanged" Margin="0,46,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run FontWeight="Bold">Title: </Run> 
+                            <Run Text="{Binding Title}" /> 
+                        </TextBlock>
+                        <TextBlock>
+                            <Run FontWeight="Bold">BeginDate: </Run>
+                            <Run Text="{Binding BeginDateTime}" />
+                        </TextBlock>
+                        <TextBlock>
+                            <Run FontWeight="Bold">Deadline: </Run>
+                            <Run Text="{Binding DeadlineDateTime}" />
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -38,18 +39,60 @@ namespace Lab2
                 var response = "";
                 Task task = Task.Run(async () =>
                 {
-                    response = await client.GetStringAsync(App.BaseUsersUri); // sends GET request
+                    response = await client.GetStringAsync(App.BaseUri+"api/tasks"); // sends GET request
                  });
                 task.Wait(); // Wait
-                listView.ItemsSource = JsonConvert.DeserializeObject<List<User>>(response);
-                Output.Text = "Hello, " + Input.Text + "!";
+                List<Task1> list = JsonConvert.DeserializeObject<List<Task1>>(response);
+                taskList.ItemsSource = list;
             }
+        }
+
+        private async void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // when we get here the user has selected a customer
+            Task1 selectedTask = taskList.SelectedItem as Task1;
+            //MessageBox.Show(selectedTask.Title + " is selected");
+
+            var dialog = new MessageDialog(selectedTask.Title + " is selected");
+            await dialog.ShowAsync();
+
+
+            //using (var client = new HttpClient())
+            //{
+            //    var response = "";
+            //    Task task = Task.Run(async () =>
+            //    {
+            //        response = await client.GetStringAsync(App.BaseUri + "api/tasks/" + selectedTask.TaskID); // sends GET request
+            //    });
+            //    task.Wait(); // Wait
+            //    List<Task1> list = JsonConvert.DeserializeObject<List<Task1>>(response);
+            //}
         }
     }
     public class User
     {
-        int UserID { get; set;}
-        string FirstName { get; set;}
-        string LastName { get; set;}
+        public int UserID { get; set;}
+        public string FirstName { get; set;}
+        public string LastName { get; set;}
+    }
+
+    public class Task1
+    {
+        public int TaskID { get; set; }
+        public DateTime BeginDateTime { get; set; }
+        public DateTime DeadlineDateTime { get; set; }
+        public string Title { get; set; }
+        public string Requirements { get; set; }
+    }
+
+    public class AssignmentDTO
+    {
+        public int TaskID { get; set; }
+        public int UserID { get; set; }
+        public string UserForName { get; set; }
+        public string UserLastName { get; set; }
+        public string TaskTitle { get; set; }
+
+
     }
 }
