@@ -22,6 +22,8 @@ namespace Lab2
     /// </summary>
     sealed partial class App : Application
     {
+        public static Uri BaseUsersUri = new Uri("http://localhost:34472/api/Users");
+        public static Frame RootFrame { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().

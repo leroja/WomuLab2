@@ -20,6 +20,7 @@
                 <Button x:Name="Enter_button" Content="enter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="123,0,128,0" Click="Button_Click"/>
             </StackPanel>
             <TextBlock x:Name="Output" TextWrapping="Wrap" Text=""/>
+            <ListView x:Name="listView" Height="450"/>
         </StackPanel>
     </Grid>
 </Page>
