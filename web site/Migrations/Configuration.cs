@@ -23,14 +23,22 @@ namespace web_site.Migrations
             );
 
             context.Tasks.AddOrUpdate(x => x.TaskID, 
-                new Task() { TaskID = 1, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now, Requirements = "I don't know", Title = "SomeThing"},
-                new Task() { TaskID = 2, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now, Requirements = "I don't know", Title = "SomeThing2" },
-                new Task() { TaskID = 3, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now, Requirements = "I don't know", Title = "SomeThing3" },
-                new Task() { TaskID = 4, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now, Requirements = "I don't know", Title = "SomeThing4" },
-                new Task() { TaskID = 5, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now, Requirements = "I don't know", Title = "SomeThing5" },
-                new Task() { TaskID = 6, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now, Requirements = "I don't know", Title = "SomeThing6" },
-                new Task() { TaskID = 7, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now, Requirements = "I don't know", Title = "SomeThing7" },
-                new Task() { TaskID = 8, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now, Requirements = "I don't know", Title = "SomeThing8" }
+                new Task() { TaskID = 1, BeginDateTime = DateTime.Now, DeadlineDateTime = DateTime.Now.AddDays(14),
+                    Requirements = "I don't know", Title = "SomeThing"},
+                new Task() { TaskID = 2, BeginDateTime = DateTime.Now.AddDays(1), DeadlineDateTime = DateTime.Now.AddDays(14),
+                    Requirements = "I don't know", Title = "SomeThing2" },
+                new Task() { TaskID = 3, BeginDateTime = DateTime.Now.AddHours(5).AddMinutes(3), DeadlineDateTime = DateTime.Now.AddDays(14),
+                    Requirements = "I don't know", Title = "SomeThing3" },
+                new Task() { TaskID = 4, BeginDateTime = DateTime.Now.AddMinutes(30), DeadlineDateTime = DateTime.Now.AddDays(14),
+                    Requirements = "I don't know", Title = "SomeThing4" },
+                new Task() { TaskID = 5, BeginDateTime = DateTime.Now.AddHours(1).AddDays(1), DeadlineDateTime = DateTime.Now.AddDays(14),
+                    Requirements = "I don't know", Title = "SomeThing5" },
+                new Task() { TaskID = 6, BeginDateTime = DateTime.Now.AddDays(2), DeadlineDateTime = DateTime.Now.AddDays(14),
+                    Requirements = "I don't know", Title = "SomeThing6" },
+                new Task() { TaskID = 7, BeginDateTime = DateTime.Now.AddMinutes(45), DeadlineDateTime = DateTime.Now.AddDays(14),
+                    Requirements = "I don't know", Title = "SomeThing7" },
+                new Task() { TaskID = 8, BeginDateTime = DateTime.Now.AddHours(12), DeadlineDateTime = DateTime.Now.AddDays(14),
+                    Requirements = "I don't know", Title = "SomeThing8" }
             );
 
             var Assignments = new List<Assignment>
