@@ -24,12 +24,16 @@ namespace Lab2.Views
     {
         public TaskList()
         {
-            if(App.Assignments == null)
-            {
-
-            }
-
             this.InitializeComponent();
+
+            listBox.ItemsSource = App.Assignments;
+
+            
+        }
+
+        private void Home_Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
         }
     }
 }

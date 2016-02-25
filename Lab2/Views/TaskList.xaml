@@ -14,7 +14,7 @@
                     <StackPanel>
                         <TextBlock TextWrapping="Wrap">
                             <Run FontWeight="Bold">Title: </Run> 
-                            <Run Text="{Binding Title}" />
+                            <Run Text="{Binding TaskTitle}" />
                         </TextBlock>
                     </StackPanel>
                 </DataTemplate>
@@ -22,6 +22,7 @@
         </ListBox>
         <StackPanel Margin="0,0,0,0" Height="100" VerticalAlignment="Top">
             <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Chosen Tasks" HorizontalAlignment="Center"/>
+            <Button Name="Home_Button" Click="Home_Button_Click" Content="Home"/>
         </StackPanel>
     </Grid>
 </Page>

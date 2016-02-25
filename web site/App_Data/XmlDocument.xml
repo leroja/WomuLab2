@@ -488,8 +488,25 @@
         </member>
         <member name="M:web_site.Controllers.AssignmentsController.GetStatus(System.Int32)">
             <summary>
-            Gets the Status from the server.
+            
             </summary>
+            <param name="TaskID">
+            
+            </param>
+            <returns>
+            
+            </returns>
+        </member>
+        <member name="M:web_site.Controllers.AssignmentsController.GetUserAssignments(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="UserID">
+            
+            </param>
+            <returns>
+            
+            </returns>
         </member>
         <member name="M:web_site.Controllers.AssignmentsController.GetAssignment(System.Int32,System.Int32)">
             <summary>
