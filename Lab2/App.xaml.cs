@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lab2.Models;
+using Lab2.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +27,7 @@ namespace Lab2
         public static Uri BaseUri = new Uri("http://localhost:34472/");
         public static Uri BaseUsersUri = new Uri("http://localhost:34472/api/Users");
         public static Frame RootFrame { get; set; }
+        public static User user { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -78,7 +81,7 @@ namespace Lab2
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                rootFrame.Navigate(typeof(UserPage), e.Arguments);
             }
             // Ensure the current window is active
             Window.Current.Activate();

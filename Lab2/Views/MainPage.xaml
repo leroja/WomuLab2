@@ -9,7 +9,6 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Height="41" VerticalAlignment="Top">
-            <Button x:Name="Enter_button" Content="enter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="123,0,128,0" Click="Button_Click"/>
         </StackPanel>
         <ListBox Name="taskList" SelectionChanged="taskList_SelectionChanged" Margin="50,41,0,0">
             <ListBox.ItemTemplate>
