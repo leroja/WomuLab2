@@ -32,6 +32,8 @@ namespace Lab2
             this.InitializeComponent();
         }
 
+
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             
@@ -52,11 +54,11 @@ namespace Lab2
         private async void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // when we get here the user has selected a customer
-            Task1 selectedTask = taskList.SelectedItem as Task1;
+           // Task1 selectedTask = taskList.SelectedItem as Task1;
             //MessageBox.Show(selectedTask.Title + " is selected");
 
-            var dialog = new MessageDialog(selectedTask.Title + " is selected");
-            await dialog.ShowAsync();
+        //    var dialog = new MessageDialog(selectedTask.Title + " is selected");
+         //   await dialog.ShowAsync();
 
 
             //using (var client = new HttpClient())
