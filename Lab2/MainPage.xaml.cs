@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Lab2.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +34,7 @@ namespace Lab2
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            
             using (var client = new HttpClient())
             {
                 var response = "";
@@ -43,6 +44,7 @@ namespace Lab2
                  });
                 task.Wait(); // Wait
                 List<Task1> list = JsonConvert.DeserializeObject<List<Task1>>(response);
+                list.Sort((x, y) => DateTime.Compare(x.BeginDateTime, y.BeginDateTime));
                 taskList.ItemsSource = list;
             }
         }
@@ -65,34 +67,10 @@ namespace Lab2
             //        response = await client.GetStringAsync(App.BaseUri + "api/tasks/" + selectedTask.TaskID); // sends GET request
             //    });
             //    task.Wait(); // Wait
-            //    List<Task1> list = JsonConvert.DeserializeObject<List<Task1>>(response);
+            //    Task1 list = JsonConvert.DeserializeObject<Task1>(response);
+            //    taskList.Items.Clear();
+            //    taskList.Items.Add(list);
             //}
         }
-    }
-    public class User
-    {
-        public int UserID { get; set;}
-        public string FirstName { get; set;}
-        public string LastName { get; set;}
-    }
-
-    public class Task1
-    {
-        public int TaskID { get; set; }
-        public DateTime BeginDateTime { get; set; }
-        public DateTime DeadlineDateTime { get; set; }
-        public string Title { get; set; }
-        public string Requirements { get; set; }
-    }
-
-    public class AssignmentDTO
-    {
-        public int TaskID { get; set; }
-        public int UserID { get; set; }
-        public string UserForName { get; set; }
-        public string UserLastName { get; set; }
-        public string TaskTitle { get; set; }
-
-
     }
 }
