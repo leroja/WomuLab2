@@ -36,9 +36,9 @@ namespace Lab2.Views
             {
                 var response = "";
                 Task task = Task.Run(async () =>
-                 {
-                     response = await Client.GetStringAsync(App.BaseUri + "api/users");
-                 });
+                {
+                    response = await Client.GetStringAsync(App.BaseUri + "api/users");
+                });
                 task.Wait();
                 List<User> list = JsonConvert.DeserializeObject<List<User>>(response);
                 userList.ItemsSource = list;
