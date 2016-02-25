@@ -57,7 +57,7 @@ namespace Lab2
         private async void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // when we get here the user has selected a customer
-           // Task1 selectedTask = taskList.SelectedItem as Task1;
+            Task1 selectedTask = taskList.SelectedItem as Task1;
             //MessageBox.Show(selectedTask.Title + " is selected");
             this.Frame.Navigate(typeof(DetailsView),selectedTask);
 
