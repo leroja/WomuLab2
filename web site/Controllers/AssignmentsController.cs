@@ -39,19 +39,42 @@ namespace web_site.Controllers
 
         }
 
-        /// <summary>
-        /// Looks up some Assignment by TaskID and UserID.
-        /// </summary>
-        /// <param name="taskID">
-        /// ID of the associated task
-        /// </param>
-        /// <param name="userID">
-        /// ID of the associated User
-        /// </param>
-        /// <returns></returns>
+            /// <summary>
+            /// Gets the Status from the server.
+            /// </summary>
+            // GET: api/Status
+            public IQueryable<AssignmentDTO> GetStatus(int TaskID)
+            {
 
-        // GET: api/Assignments/5
-        [ResponseType(typeof(AssignmentDTO))]
+
+                var Assignments = from a in db.Assignments where a.TaskID == TaskID
+                                  select new AssignmentDTO()
+                                  {
+                                      TaskID = a.TaskID,
+                                      TaskTitle = a.Task.Title,
+                                      UserID = a.UserID,
+                                      UserForName = a.User.FirstName,
+                                      UserLastName = a.User.LastName
+
+                                  };
+
+                return Assignments;
+
+            }
+
+            /// <summary>
+            /// Looks up some Assignment by TaskID and UserID.
+            /// </summary>
+            /// <param name="taskID">
+            /// ID of the associated task
+            /// </param>
+            /// <param name="userID">
+            /// ID of the associated User
+            /// </param>
+            /// <returns></returns>
+
+            // GET: api/Assignments/5
+            [ResponseType(typeof(AssignmentDTO))]
         public IHttpActionResult GetAssignment(int taskID,int userID)
         {
 
