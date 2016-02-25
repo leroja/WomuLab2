@@ -24,6 +24,11 @@ namespace Lab2.Views
     {
         public TaskList()
         {
+            if(App.Assignments == null)
+            {
+
+            }
+
             this.InitializeComponent();
         }
     }

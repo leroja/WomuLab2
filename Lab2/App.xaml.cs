@@ -2,6 +2,7 @@
 using Lab2.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -27,6 +28,7 @@ namespace Lab2
         public static Uri BaseUri = new Uri("http://localhost:34472/");
         public static Uri BaseUsersUri = new Uri("http://localhost:34472/api/Users");
         public static Frame RootFrame { get; set; }
+        public static ObservableCollection<AssignmentDTO> Assignments { get; set; }
         public static User user { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

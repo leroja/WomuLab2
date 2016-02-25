@@ -8,6 +8,20 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <ListBox x:Name="listBox" HorizontalAlignment="Left" Height="500" VerticalAlignment="Top" Width="350" Margin="0,130,0,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap">
+                            <Run FontWeight="Bold">Title: </Run> 
+                            <Run Text="{Binding Title}" />
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Margin="0,0,0,0" Height="100" VerticalAlignment="Top">
+            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="Chosen Tasks" HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </Page>
