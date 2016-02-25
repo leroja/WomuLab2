@@ -35,13 +35,17 @@ namespace Lab2
         {
             this.InitializeComponent();
 
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
             using (var client = new HttpClient())
             {
                 var response = "";
                 Task task = Task.Run(async () =>
                 {
                     response = await client.GetStringAsync(App.BaseUri + "api/tasks"); // sends GET request
-                });
+                 });
                 task.Wait(); // Wait
                 List<Task1> list = JsonConvert.DeserializeObject<List<Task1>>(response);
                 list.Sort((x, y) => DateTime.Compare(x.BeginDateTime, y.BeginDateTime));

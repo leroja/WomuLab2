@@ -23,30 +23,29 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid Margin="0,0,0,0">
-                    <StackPanel Height="41" VerticalAlignment="Top">
-                        <Button x:Name="Enter_button" Content="enter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="123,0,128,0" Click="Button_Click"/>
-                    </StackPanel>
+        <StackPanel Height="41" VerticalAlignment="Top">
+        </StackPanel>
                     <ListBox Name="taskList" SelectionChanged="taskList_SelectionChanged" Margin="0,41,0,0">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <TextBlock TextWrapping="Wrap">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap">
                             <Run FontWeight="Bold">Title: </Run> 
-                            <Run Text="{Binding Title}" />
-                                    </TextBlock>
-                                    <TextBlock>
+                            <Run Text="{Binding Title}" /> 
+                        </TextBlock>
+                        <TextBlock>
                             <Run FontWeight="Bold">BeginDate: </Run>
                             <Run Text="{Binding BeginDateTime}" />
-                                    </TextBlock>
-                                    <TextBlock>
+                        </TextBlock>
+                        <TextBlock>
                             <Run FontWeight="Bold">Deadline: </Run>
                             <Run Text="{Binding DeadlineDateTime}" />
-                                    </TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </Grid>
+                        </TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
             </SplitView.Content>
         </SplitView>
     </Grid>
