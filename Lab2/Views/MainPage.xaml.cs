@@ -21,6 +21,7 @@ using Windows.UI.ViewManagement;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Lab2.Views;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -34,6 +35,18 @@ namespace Lab2
         public MainPage()
         {
             this.InitializeComponent();
+
+            using (var client = new HttpClient())
+            {
+                var response = "";
+                Task task = Task.Run(async () =>
+                {
+                    response = await client.GetStringAsync(App.BaseUri + "/api/Assignments?UserID=" + App.user.UserID); // sends GET request
+                });
+                task.Wait(); // Wait
+                ObservableCollection<AssignmentDTO> list = JsonConvert.DeserializeObject<ObservableCollection<AssignmentDTO>>(response);
+                App.Assignments = list;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
