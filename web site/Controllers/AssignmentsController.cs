@@ -39,11 +39,11 @@ namespace web_site.Controllers
 
         }
 
-            /// <summary>
-            /// Gets the Status from the server.
-            /// </summary>
-            // GET: api/Status
-            public IQueryable<AssignmentDTO> GetStatus(int TaskID)
+        /// <summary>
+        /// Gets the Status from the server.
+        /// </summary>
+        // GET: api/Assignments/1
+        public IQueryable<AssignmentDTO> GetStatus(int TaskID)
             {
 
 

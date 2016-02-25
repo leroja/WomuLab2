@@ -486,6 +486,11 @@
             Gets the assigments from the server.
             </summary>
         </member>
+        <member name="M:web_site.Controllers.AssignmentsController.GetStatus(System.Int32)">
+            <summary>
+            Gets the Status from the server.
+            </summary>
+        </member>
         <member name="M:web_site.Controllers.AssignmentsController.GetAssignment(System.Int32,System.Int32)">
             <summary>
             Looks up some Assignment by TaskID and UserID.

@@ -14,6 +14,7 @@ namespace Lab2
 {
     public sealed partial class DetailsView : Page
     {
+        Task1 user;
         public DetailsView()
         {
             this.InitializeComponent();
@@ -27,13 +28,23 @@ namespace Lab2
         {
             if (e.Parameter is Task1)
             {
-                Task1 user = (Task1)e.Parameter;
-                TaksName.Text = user.Title;
-                StartTime.Text = user.BeginDateTime.ToString();
-                EndTime.Text = user.DeadlineDateTime.ToString();
-                Requirements.Text = user.Requirements;
+                user= (Task1)e.Parameter;
+                TaksName.Text = "Task title: "+user.Title;
+                StartTime.Text = "Start time of Task: "+user.BeginDateTime.ToString();
+                EndTime.Text = "Dedline For Task: "+user.DeadlineDateTime.ToString();
+                Requirements.Text = "Requirements: "+ user.Requirements;
 
                 AssignmentDTO ass = getTaskStatus(user);
+                if (ass == null)
+                {
+                    Status.Text = "Status : " + "Free";
+                }
+                else if (ass.UserForName == null)
+                {
+                    Status.Text = "Status : " + "conflct";
+                }
+                else
+                    Status.Text = "Status : "+"Task taken by " + ass.UserForName + " " + ass.UserLastName;
 
             }
 
@@ -47,7 +58,7 @@ namespace Lab2
                 var response = "";
                 Task task = Task.Run(async () =>
                 {
-                    response = await client.GetStringAsync(App.BaseUri + "api/Status"); // sends GET request
+                    response = await client.GetStringAsync(App.BaseUri + "/api/Assignments?TaskID="+user.TaskID); // sends GET request
                 });
                 task.Wait(); // Wait
                 List<AssignmentDTO> list = JsonConvert.DeserializeObject<List<AssignmentDTO>>(response);
@@ -77,6 +88,11 @@ namespace Lab2
 
                 return (tri);
             }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
         }
     }
             
