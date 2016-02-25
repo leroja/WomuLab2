@@ -34,8 +34,8 @@ namespace Lab2
         public MainPage()
         {
             this.InitializeComponent();
-
         }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             
