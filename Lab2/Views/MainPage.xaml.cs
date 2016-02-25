@@ -17,6 +17,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -56,9 +59,8 @@ namespace Lab2
             // when we get here the user has selected a customer
            // Task1 selectedTask = taskList.SelectedItem as Task1;
             //MessageBox.Show(selectedTask.Title + " is selected");
+            this.Frame.Navigate(typeof(DetailsView),selectedTask);
 
-        //    var dialog = new MessageDialog(selectedTask.Title + " is selected");
-         //   await dialog.ShowAsync();
 
 
             //using (var client = new HttpClient())
