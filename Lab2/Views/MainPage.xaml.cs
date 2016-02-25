@@ -20,6 +20,7 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
+using Lab2.Views;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -33,25 +34,43 @@ namespace Lab2
         public MainPage()
         {
             this.InitializeComponent();
-        }
 
-
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
             using (var client = new HttpClient())
             {
                 var response = "";
                 Task task = Task.Run(async () =>
                 {
-                    response = await client.GetStringAsync(App.BaseUri+"api/tasks"); // sends GET request
-                 });
+                    response = await client.GetStringAsync(App.BaseUri + "api/tasks"); // sends GET request
+                });
                 task.Wait(); // Wait
                 List<Task1> list = JsonConvert.DeserializeObject<List<Task1>>(response);
                 list.Sort((x, y) => DateTime.Compare(x.BeginDateTime, y.BeginDateTime));
                 taskList.ItemsSource = list;
             }
+        }
+
+
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
+
+
+        private void TaskList_Click(object sender, RoutedEventArgs e)
+        {
+            //var frame = this.DataContext as Frame;
+            //Page page = frame?.Content as Page;
+            //if (page?.GetType() != typeof(TaskList))
+            //{
+                this.Frame.Navigate(typeof(TaskList));
+            //}
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            
         }
 
         private async void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
