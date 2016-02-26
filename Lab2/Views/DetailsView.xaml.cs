@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Windows.UI.Popups;
 
 namespace Lab2
 {
@@ -90,7 +91,7 @@ namespace Lab2
             }
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private async void button_Click(object sender, RoutedEventArgs e)
         {
             AssignmentDTO temp = new AssignmentDTO
             {
@@ -106,6 +107,27 @@ namespace Lab2
                 UserID = App.user.UserID
             };
 
+            HttpResponseMessage response = null;
+            using (var client = new HttpClient())
+            {
+                string json = JsonConvert.SerializeObject(test);
+
+                Task task = Task.Run(async () =>
+                {
+                    StringContent till = new StringContent(json);
+                    response = await client.PostAsync(App.BaseUri + "api/Assignments?UserId=" + test.UserID + "&TaskID=" + test.TaskID, till);
+                });
+                task.Wait();
+            }
+            if (response.ReasonPhrase.Equals("Not Found") )
+            {
+                var dialog = new MessageDialog("User alredy assignd to task");
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                this.Frame.Navigate(typeof(MainPage));
+            }
             this.Frame.Navigate(typeof(MainPage));
         }
     }

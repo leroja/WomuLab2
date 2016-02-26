@@ -534,11 +534,11 @@
             assigment info
             </param>
         </member>
-        <member name="M:web_site.Controllers.AssignmentsController.PostAssignment(web_site.Models.Assignment)">
+        <member name="M:web_site.Controllers.AssignmentsController.PostAssignment(System.Int32,System.Int32)">
             <summary>
             Create a new assignment
             </summary>
-            <param name="assignment">
+            <param x="assignment">
             assignment info
             </param>
         </member>
