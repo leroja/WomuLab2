@@ -25,22 +25,22 @@
                 <Grid Margin="0,0,0,0">
         <StackPanel Height="41" VerticalAlignment="Top">
         </StackPanel>
-                    <ListBox Name="taskList" SelectionChanged="taskList_SelectionChanged" Margin="0,41,0,0">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock TextWrapping="Wrap">
-                            <Run FontWeight="Bold">Title: </Run> 
-                            <Run Text="{Binding Title}" /> 
-                        </TextBlock>
-                        <TextBlock>
-                            <Run FontWeight="Bold">BeginDate: </Run>
-                            <Run Text="{Binding BeginDateTime}" />
-                        </TextBlock>
-                        <TextBlock>
-                            <Run FontWeight="Bold">Deadline: </Run>
-                            <Run Text="{Binding DeadlineDateTime}" />
-                        </TextBlock>
+            <ListBox Name="taskList" SelectionChanged="taskList_SelectionChanged" Margin="0,41,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap">
+                                <Run FontWeight="Bold">Title: </Run> 
+                                <Run Text="{Binding Title}" /> 
+                            </TextBlock>
+                            <TextBlock>
+                                <Run FontWeight="Bold">BeginDate: </Run>
+                                <Run Text="{Binding BeginDateTime}" />
+                            </TextBlock>
+                            <TextBlock>
+                                <Run FontWeight="Bold">Deadline: </Run>
+                                <Run Text="{Binding DeadlineDateTime}" />
+                            </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
