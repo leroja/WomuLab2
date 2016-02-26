@@ -41,9 +41,9 @@ namespace Lab2
                 {
                     Status.Text = "Status : " + "Free";
                 }
-                else if (ass.UserForName == null)
+                else if (ass.TaskTitle == null)
                 {
-                    Status.Text = "Status : " + "conflct";
+                    Status.Text = "Status : " + "conflct by: "+ ass.UserForName + " And " + ass.UserLastName + " and "+ass.UserID +" more User(s)" ;
                 }
                 else
                     Status.Text = "Status : "+"Task taken by " + ass.UserForName + " " + ass.UserLastName;
@@ -85,7 +85,12 @@ namespace Lab2
             else {
                 AssignmentDTO tri = new AssignmentDTO
                 {
-                    UserForName = null
+                    UserForName = temp[1].UserForName + " " + temp[1].UserLastName,
+                    UserLastName = temp[0].UserForName + " " + temp[0].UserLastName,
+                    UserID = temp.Count - 2,
+                    TaskTitle = null
+                  
+                    
                 };
 
                 return (tri);
