@@ -23,7 +23,8 @@ namespace Lab2
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(MainPage));
+            this.Frame.GoBack();
+            //this.Frame.Navigate(typeof(MainPage));
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
