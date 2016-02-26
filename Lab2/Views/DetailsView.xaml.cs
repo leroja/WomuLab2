@@ -92,6 +92,19 @@ namespace Lab2
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
+            AssignmentDTO temp = new AssignmentDTO
+            {
+                UserID = App.user.UserID,
+                UserForName = App.user.FirstName,
+                UserLastName = App.user.LastName,
+                TaskID = user.TaskID,
+                TaskTitle = user.Title
+            };
+            Assignment test = new Assignment
+            {
+                TaskID = user.TaskID,
+                UserID = App.user.UserID
+            };
 
             this.Frame.Navigate(typeof(MainPage));
         }
