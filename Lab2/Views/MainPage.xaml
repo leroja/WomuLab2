@@ -33,11 +33,11 @@
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid Margin="0,0,0,0">
-            <StackPanel Height="50" VerticalAlignment="Top">
+            <StackPanel Height="60" VerticalAlignment="Top">
                         <TextBlock Text="Start" />
                         <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Width="149" Name="StartPicker"/>
                     </StackPanel>
-            <StackPanel Margin="0,50,0,0">
+            <StackPanel Margin="0,60,0,0">
                         <TextBlock Text="deadline"/>
                         <DatePicker HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="150" Name="DeadlinePicker"/>
                         <Button Name="Filter_button" Content="Search" Click="Filter_button_Click"/>

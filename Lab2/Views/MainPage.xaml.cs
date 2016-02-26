@@ -190,8 +190,10 @@ namespace Lab2
             List<Task1> temp = new List<Task1>();
             foreach (Task1 task in list)
             {
+                DateTime tempStart = task.BeginDateTime.Date;
+                DateTime tempDeadline = task.DeadlineDateTime.Date;
 
-                if (task.DeadlineDateTime > deadline && task.BeginDateTime > start)
+                if (tempDeadline <= deadline && tempStart >= start)
                 {
                     temp.Add(task);
                 }
