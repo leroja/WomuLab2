@@ -63,6 +63,7 @@ namespace Lab2
                 List<Task1> list = JsonConvert.DeserializeObject<List<Task1>>(response);
                 list.Sort((x, y) => DateTime.Compare(x.BeginDateTime, y.BeginDateTime));
                 taskList.ItemsSource = list;
+                App.tasks = list;
             }
         }
 
@@ -82,12 +83,6 @@ namespace Lab2
             //{
                 this.Frame.Navigate(typeof(TaskList));
             //}
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
         }
 
         private async void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -111,6 +106,98 @@ namespace Lab2
             //    taskList.Items.Clear();
             //    taskList.Items.Add(list);
             //}
+        }
+
+        private void DoneTask_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime current = DateTime.Now;
+
+            taskList.ItemsSource = null;
+
+
+
+            List<Task1> list = App.tasks;
+            List<Task1> temp = new List<Task1>();
+            foreach (Task1 task in list)
+            {
+
+                if (task.DeadlineDateTime > current)
+                {
+                    temp.Add(task);
+                }
+            }
+            taskList.ItemsSource = temp;
+
+        }
+
+        private void TaskNameSearch_Click(object sender, RoutedEventArgs e)
+        {
+            taskList.ItemsSource = null;
+
+
+            if (TaskName.Text.Equals(""))
+            {
+                taskList.ItemsSource = App.tasks;
+            }
+            else
+            {
+                List<Task1> list = App.tasks;
+                List<Task1> temp = new List<Task1>();
+                foreach (Task1 task in list)
+                {
+
+                    if (task.Title.Contains(TaskName.Text))
+                    {
+                        temp.Add(task);
+                    }
+                }
+                taskList.ItemsSource = temp;
+            }
+        }
+
+        private void TaskName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            taskList.ItemsSource = null;
+
+
+
+            if (TaskName.Text.Equals(""))
+            {
+                taskList.ItemsSource = App.tasks;
+            }
+            else
+            {
+                List<Task1> list = App.tasks;
+                List<Task1> temp = new List<Task1>();
+                foreach (Task1 task in list)
+                {
+                    if (task.Title.Contains(TaskName.Text))
+                    {
+                        temp.Add(task);
+                    }
+                }
+                taskList.ItemsSource = temp;
+            }
+        }
+
+        private void Filter_button_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime start = StartPicker.Date.Date;
+            DateTime deadline = DeadlinePicker.Date.Date;
+
+
+            List<Task1> list = App.tasks;
+            List<Task1> temp = new List<Task1>();
+            foreach (Task1 task in list)
+            {
+
+                if (task.DeadlineDateTime > deadline && task.BeginDateTime > start)
+                {
+                    temp.Add(task);
+                }
+            }
+            taskList.ItemsSource = temp;
+
         }
     }
 }

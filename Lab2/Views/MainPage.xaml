@@ -15,17 +15,34 @@
                     <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
                         Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button x:Name="TaskList" FontFamily="Segoe MDL2 Assets" Content="&#xE133;"
+                        <Button x:Name="TaskListButton" FontFamily="Segoe MDL2 Assets" Content="&#xE133;"
                             Width="50" Height="50" Background="Transparent" Click="TaskList_Click"/>
                         <TextBlock Text="Task List" FontSize="18" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="DoneTask" FontFamily="Segoe MDL2 Assets" Content="&#xE11A;"
+                            Width="50" Height="50" Background="Transparent" Click="DoneTask_Click"/>
+                        <TextBlock Text="Remove old tasks" FontSize="12" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="TaskNameSearch" FontFamily="Segoe MDL2 Assets" Content="&#xE11A;"
+                            Width="50" Height="50" Background="Transparent" Click="TaskNameSearch_Click"/>
+                        <TextBox Name="TaskName" Text="Task Title:" FontSize="12" VerticalAlignment="Center" TextChanged="TaskName_TextChanged"/>
                     </StackPanel>
                 </StackPanel>
             </SplitView.Pane>
             <SplitView.Content>
                 <Grid Margin="0,0,0,0">
-        <StackPanel Height="41" VerticalAlignment="Top">
-        </StackPanel>
-            <ListBox Name="taskList" SelectionChanged="taskList_SelectionChanged" Margin="0,41,0,0">
+            <StackPanel Height="50" VerticalAlignment="Top">
+                        <TextBlock Text="Start" />
+                        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Width="149" Name="StartPicker"/>
+                    </StackPanel>
+            <StackPanel Margin="0,50,0,0">
+                        <TextBlock Text="deadline"/>
+                        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="150" Name="DeadlinePicker"/>
+                        <Button Name="Filter_button" Content="Search" Click="Filter_button_Click"/>
+                    </StackPanel>
+            <ListBox Name="taskList" SelectionChanged="taskList_SelectionChanged" Margin="0,150,0,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>

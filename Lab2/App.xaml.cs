@@ -31,6 +31,7 @@ namespace Lab2
         public static Frame RootFrame { get; set; }
         public static ObservableCollection<AssignmentDTO> Assignments { get; set; }
         public static User user { get; set; }
+        public static List<Task1> tasks { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
