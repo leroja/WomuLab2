@@ -43,10 +43,18 @@ namespace Lab2
                 }
                 else if (ass.TaskTitle == null)
                 {
-                    Status.Text = "Status : " + "conflct by: "+ ass.UserForName + " And " + ass.UserLastName + " and "+ass.UserID +" more User(s)" ;
+                    if (ass.UserID > 0)
+                    {
+                        Status.Text = "Status : " + "conflct by: " + ass.UserForName + " And " + ass.UserLastName + " and " + ass.UserID + " more User(s)";
+                    }
+                    else
+                    {
+                        Status.Text = "Status : " + "conflct by: " + ass.UserForName + " And " + ass.UserLastName;
+
+                    }
                 }
                 else
-                    Status.Text = "Status : "+"Task taken by " + ass.UserForName + " " + ass.UserLastName;
+                    Status.Text = "Status : " + "Task taken by " + ass.UserForName + " " + ass.UserLastName;
 
             }
 

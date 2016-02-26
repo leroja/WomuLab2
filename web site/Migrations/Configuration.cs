@@ -19,7 +19,11 @@ namespace web_site.Migrations
             context.Users.AddOrUpdate(x => x.UserID,
                 new User() { UserID = 1, FirstName = "Lennart", LastName = "Jakobsson"},
                 new User() { UserID = 2, FirstName = "Test", LastName = "Testsson" },
-                new User() { UserID = 3, FirstName = "Alexander", LastName = "Pihl" }
+                new User() { UserID = 3, FirstName = "Alexander", LastName = "Pihl" },
+                new User() { UserID = 4, FirstName = "Thora", LastName = "Rot" },
+                new User() { UserID = 5, FirstName = "Kieron", LastName = "Simon" },
+                new User() { UserID = 6, FirstName = "Fedya", LastName = "Coeman" },
+                new User() { UserID = 7, FirstName = "Israa", LastName = "Pinho" }
             );
 
             context.Tasks.AddOrUpdate(x => x.TaskID, 
