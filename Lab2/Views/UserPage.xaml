@@ -28,7 +28,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,65,0,0" TextWrapping="Wrap" Text="Pick you'r user" VerticalAlignment="Top" Height="35" Width="340"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,65,0,0" TextWrapping="Wrap" Text="Select your user" VerticalAlignment="Top" Height="35" Width="340"/>
 
     </Grid>
 </Page>
