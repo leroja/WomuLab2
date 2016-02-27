@@ -504,6 +504,7 @@
             <param name="UserID">
             Id of user
             </param>
+            // GET: api/Assignments/1
         </member>
         <member name="M:web_site.Controllers.AssignmentsController.GetAssignment(System.Int32,System.Int32)">
             <summary>
@@ -549,6 +550,19 @@
             <param name="userID">
             ID of the associated User
             </param>
+        </member>
+        <member name="M:web_site.Controllers.AssignmentsController.test(System.Int32)">
+            <summary>
+            finds all assignments to a task and returns a 
+            list of usernames of users who are assigned to the task
+            </summary>
+            <param name="Id">
+            Id of the task
+            </param>
+            <returns>
+            a list of names or a list that contains a single string ("none")
+            if there are no users assigned to the task
+            </returns>
         </member>
         <member name="M:web_site.Controllers.HomeController.test(System.Int32)">
             <summary>

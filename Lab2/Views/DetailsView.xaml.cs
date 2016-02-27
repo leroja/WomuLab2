@@ -27,98 +27,43 @@ namespace Lab2
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            List<string> list;
             if (e.Parameter is Task1)
             {
                 user= (Task1)e.Parameter;
                 TaksName.Text = "Task title: "+user.Title;
-                StartTime.Text = "Start time of Task: "+user.BeginDateTime.ToString();
-                EndTime.Text = "Dedline For Task: "+user.DeadlineDateTime.ToString();
+                StartTime.Text = "Start time of task: "+user.BeginDateTime.ToString();
+                EndTime.Text = "Deadline for task: "+user.DeadlineDateTime.ToString();
                 Requirements.Text = "Requirements: "+ user.Requirements;
 
-                AssignmentDTO ass = getTaskStatus(user);
-                if (ass == null)
-                {
-                    Status.Text = "Status : " + "Free";
-                }
-                else if (ass.TaskTitle == null)
-                {
-                    if (ass.UserID > 0)
-                    {
-                        Status.Text = "Status : " + "conflct by: " + ass.UserForName + " And " + ass.UserLastName + " and " + ass.UserID + " more User(s)";
-                    }
-                    else
-                    {
-                        Status.Text = "Status : " + "conflct by: " + ass.UserForName + " And " + ass.UserLastName;
 
-                    }
+                using (var client = new HttpClient())
+                {
+                    var response = "";
+                    Task task = Task.Run(async () =>
+                    {
+                        response = await client.GetStringAsync(App.BaseUri + "/api/Assignments?TaskID=" + user.TaskID); // sends GET request
+                    });
+                    task.Wait(); // Wait
+                    list = JsonConvert.DeserializeObject<List<string>>(response);
                 }
-                else
-                    Status.Text = "Status : " + "Task taken by " + ass.UserForName + " " + ass.UserLastName;
+
+                Status.Text = "All assigned users: \r\n" + String.Join(", ", ((List<string>)list).ToArray()); ;
 
             }
 
         }
 
-        private AssignmentDTO getTaskStatus(Task1 user)
-        {
-            List<AssignmentDTO> temp = new List<AssignmentDTO>();
-            using (var client = new HttpClient())
-            {
-                var response = "";
-                Task task = Task.Run(async () =>
-                {
-                    response = await client.GetStringAsync(App.BaseUri + "/api/Assignments?TaskID="+user.TaskID); // sends GET request
-                });
-                task.Wait(); // Wait
-                List<AssignmentDTO> list = JsonConvert.DeserializeObject<List<AssignmentDTO>>(response);
-                temp = list;
-            }
-            if (temp.Count == 0)
-            {
-                return (null);
-            }
-            else if (temp.Count == 1)
-            {
-                AssignmentDTO ass = new AssignmentDTO
-                {
-                    UserID = temp.First().UserID,
-                    TaskID = temp.First().TaskID,
-                    UserForName = temp.First().UserForName,
-                    UserLastName = temp.First().UserLastName,
-                    TaskTitle = temp.First().TaskTitle
-                };
-                return (ass);
-            }
-            else {
-                AssignmentDTO tri = new AssignmentDTO
-                {
-                    UserForName = temp[1].UserForName + " " + temp[1].UserLastName,
-                    UserLastName = temp[0].UserForName + " " + temp[0].UserLastName,
-                    UserID = temp.Count - 2,
-                    TaskTitle = null
-                };
-
-                return (tri);
-            }
-        }
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            AssignmentDTO temp = new AssignmentDTO
-            {
-                UserID = App.user.UserID,
-                UserForName = App.user.FirstName,
-                UserLastName = App.user.LastName,
-                TaskID = user.TaskID,
-                TaskTitle = user.Title
-            };
+            HttpResponseMessage response = null;
+
             Assignment test = new Assignment
             {
                 TaskID = user.TaskID,
                 UserID = App.user.UserID
             };
-
-            HttpResponseMessage response = null;
             using (var client = new HttpClient())
             {
                 string json = JsonConvert.SerializeObject(test);
@@ -126,13 +71,13 @@ namespace Lab2
                 Task task = Task.Run(async () =>
                 {
                     StringContent till = new StringContent(json);
-                    response = await client.PostAsync(App.BaseUri + "api/Assignments?UserId=" + test.UserID + "&TaskID=" + test.TaskID, till);
+                    response = await client.PostAsync(App.BaseUri + "api/Assignments?UserId=" + App.user.UserID + "&TaskID=" + user.TaskID, till);
                 });
                 task.Wait();
             }
-            if (response.ReasonPhrase.Equals("Not Found") )
+            if (response.ReasonPhrase.Equals("Not Found"))
             {
-                var dialog = new MessageDialog("User alredy assignd to task");
+                var dialog = new MessageDialog("User already assigned to task");
                 await dialog.ShowAsync();
             }
             else

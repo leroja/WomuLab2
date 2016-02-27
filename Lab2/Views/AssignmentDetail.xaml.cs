@@ -23,7 +23,7 @@ namespace Lab2.Views
     public sealed partial class TaskDetail : Page
     {
 
-        private Task1 task;
+        private AssignmentDTO assignment;
         public TaskDetail()
         {
             this.InitializeComponent();
@@ -31,13 +31,15 @@ namespace Lab2.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is Task1)
+            if (e.Parameter is AssignmentDTO)
             {
-                task = (Task1)e.Parameter;
-                Title.Text = "Task title: " + task.Title;
-                StartTime.Text = "Start time of Task: " + task.BeginDateTime.ToString();
-                Deadline.Text = "Dedline For Task: " + task.DeadlineDateTime.ToString();
-                Requirements.Text = "Requirements: " + task.Requirements;
+                assignment = (AssignmentDTO)e.Parameter;
+                Title.Text = "Task title: " + assignment.Title;
+                StartTime.Text = "Start time of Task: " + assignment.BeginDateTime.ToString();
+                Deadline.Text = "Dedline For Task: " + assignment.DeadlineDateTime.ToString();
+                Requirements.Text = "Requirements: " + assignment.Requirements;
+
+                Users.Text = "All Assigned users: \r\n" + String.Join(", ", ((List<string>)assignment.Users).ToArray()); ;
             }
 
         }
@@ -48,13 +50,12 @@ namespace Lab2.Views
             {
                 Task thtask = Task.Run(async () =>
                 {
-                    
-                    await client.DeleteAsync(App.BaseUri + "api/assignments?taskID=" + task.TaskID + "&userID=" + App.user.UserID);
+                    await client.DeleteAsync(App.BaseUri + "api/assignments?taskID=" + assignment.TaskID + "&userID=" + App.user.UserID);
                 });
                 thtask.Wait(); // Wait
             }
 
-            var delTemp = App.Assignments.Where(x => x.TaskID == task.TaskID && x.UserID == App.user.UserID);
+            var delTemp = App.Assignments.Where(x => x.TaskID == assignment.TaskID);
 
             AssignmentDTO del = delTemp.FirstOrDefault();
 

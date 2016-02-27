@@ -9,9 +9,10 @@ namespace Lab2.Models
     public class AssignmentDTO
     {
         public int TaskID { get; set; }
-        public int UserID { get; set; }
-        public string UserForName { get; set; }
-        public string UserLastName { get; set; }
-        public string TaskTitle { get; set; }
+        public DateTime BeginDateTime { get; set; }
+        public DateTime DeadlineDateTime { get; set; }
+        public string Title { get; set; }
+        public string Requirements { get; set; }
+        public List<string> Users { get; set; }
     }
 }

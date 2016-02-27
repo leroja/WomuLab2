@@ -46,7 +46,6 @@ namespace Lab2.Views
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Task1 task;
             AssignmentDTO selectedAssignment = listBox.SelectedItem as AssignmentDTO;
 
 
@@ -54,19 +53,7 @@ namespace Lab2.Views
             {
                 return;
             }
-            using (var client = new HttpClient())
-            {
-                var response = "";
-                Task thtask = Task.Run(async () =>
-                {
-
-                    response = await client.GetStringAsync(App.BaseUri + "api/tasks/"+selectedAssignment.TaskID); // sends GET request
-                });
-                thtask.Wait(); // Wait
-                task = JsonConvert.DeserializeObject<Task1>(response);
-            }
-
-            this.Frame.Navigate(typeof(TaskDetail),task);
+            this.Frame.Navigate(typeof(TaskDetail),selectedAssignment);
         }
     }
 }
