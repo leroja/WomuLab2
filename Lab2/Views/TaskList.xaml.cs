@@ -32,7 +32,6 @@ namespace Lab2.Views
 
             listBox.ItemsSource = App.Assignments;
 
-            
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -66,8 +65,6 @@ namespace Lab2.Views
                 thtask.Wait(); // Wait
                 task = JsonConvert.DeserializeObject<Task1>(response);
             }
-
-            
 
             this.Frame.Navigate(typeof(TaskDetail),task);
         }

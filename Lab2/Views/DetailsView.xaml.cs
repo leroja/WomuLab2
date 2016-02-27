@@ -24,7 +24,6 @@ namespace Lab2
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
-            //this.Frame.Navigate(typeof(MainPage));
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -97,8 +96,6 @@ namespace Lab2
                     UserLastName = temp[0].UserForName + " " + temp[0].UserLastName,
                     UserID = temp.Count - 2,
                     TaskTitle = null
-                  
-                    
                 };
 
                 return (tri);

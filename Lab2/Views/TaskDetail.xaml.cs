@@ -20,9 +20,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Lab2.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class TaskDetail : Page
     {
 
@@ -31,8 +28,6 @@ namespace Lab2.Views
         {
             this.InitializeComponent();
         }
-
-
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -51,12 +46,10 @@ namespace Lab2.Views
         {
             using (var client = new HttpClient())
             {
-                var response = "";
                 Task thtask = Task.Run(async () =>
                 {
                     
                     await client.DeleteAsync(App.BaseUri + "api/assignments?taskID=" + task.TaskID + "&userID=" + App.user.UserID);
-                    //response = await client.GetStringAsync(App.BaseUri + "api/tasks"); // sends GET request
                 });
                 thtask.Wait(); // Wait
             }
@@ -65,19 +58,15 @@ namespace Lab2.Views
 
             AssignmentDTO del = delTemp.FirstOrDefault();
 
-            // remove from assignments list
-
             App.Assignments.Remove(del);
 
 
-            //this.Frame.GoBack();
-            this.Frame.Navigate(typeof(TaskList));
+            this.Frame.GoBack();
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
-            //this.Frame.Navigate(typeof(TaskList));
         }
     }
 }

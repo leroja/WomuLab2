@@ -88,7 +88,7 @@ namespace web_site.Controllers
         /// Create a new task
         /// </summary>
         /// <param name="task">
-        /// 
+        /// task info
         /// </param>
         // POST: api/Tasks
         [ResponseType(typeof(Task))]

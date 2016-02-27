@@ -22,8 +22,7 @@ namespace web_site.Controllers
         // GET: api/Assignments
         public IQueryable<AssignmentDTO> GetAssignments()
         {
-
-
+            
             var Assignments = from a in db.Assignments
                         select new AssignmentDTO()
                         {
@@ -69,19 +68,15 @@ namespace web_site.Controllers
 
         }
         /// <summary>
-        /// 
+        /// gets all assignments that belong to a specific user
         /// </summary>
         /// <param name="UserID">
-        /// 
+        /// Id of user
         /// </param>
-        /// <returns>
-        /// 
-        /// </returns>
         [ResponseType(typeof(AssignmentDTO))]
         public IQueryable<AssignmentDTO> GetUserAssignments(int UserID)
         {
-
-
+            
             var Assignments = from a in db.Assignments
                               where a.UserID == UserID
                               select new AssignmentDTO()
@@ -112,9 +107,6 @@ namespace web_site.Controllers
         [ResponseType(typeof(AssignmentDTO))]
         public IHttpActionResult GetAssignment(int taskID,int userID)
         {
-
-            //Assignment assignment = db.Assignments.Find(taskID, userID);
-
 
             var Ass = db.Assignments.Find(taskID, userID);
 
@@ -185,7 +177,7 @@ namespace web_site.Controllers
         /// <summary>
         /// Create a new assignment
         /// </summary>
-        /// <param x="assignment">
+        /// <param >
         /// assignment info
         /// </param>
         // POST: api/Assignments
@@ -213,28 +205,6 @@ namespace web_site.Controllers
                 return Ok("added in db");
             }
         }
-        //    }
-
-        //    //db.Assignments.Add(assignment);
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //       // if (AssignmentExists(assignment.TaskID,assignment.UserID))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtRoute("DefaultApi", new { id = assignment.TaskID }, assignment);
-        //}
 
         /// <summary>
         /// Delete an assignment

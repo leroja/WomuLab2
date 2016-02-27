@@ -41,7 +41,17 @@ namespace web_site.Controllers
             return View(TaskAssigns);
         }
 
-
+        /// <summary>
+        /// finds all assignments to a task and returns a 
+        /// list of usernames of users who are assigned to the task
+        /// </summary>
+        /// <param name="Id">
+        /// Id of the task
+        /// </param>
+        /// <returns>
+        /// a list of names or a list that contains a single string ("none")
+        /// if there are no users assigned to the task
+        /// </returns>
         private List<string> test(int Id)
         {
             var t = db.Assignments.Where(a => a.TaskID == Id);
@@ -63,11 +73,7 @@ namespace web_site.Controllers
                 string name = "" + first + " " + last;
                 users.Add(name);
             }
-            //string first = s.User.FirstName;
-            //string last = s.User.LastName;
 
-            //string name = "" + first + " " + last;
-            //return name;
             return users;
         }
     }

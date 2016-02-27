@@ -499,14 +499,11 @@
         </member>
         <member name="M:web_site.Controllers.AssignmentsController.GetUserAssignments(System.Int32)">
             <summary>
-            
+            gets all assignments that belong to a specific user
             </summary>
             <param name="UserID">
-            
+            Id of user
             </param>
-            <returns>
-            
-            </returns>
         </member>
         <member name="M:web_site.Controllers.AssignmentsController.GetAssignment(System.Int32,System.Int32)">
             <summary>
@@ -538,7 +535,7 @@
             <summary>
             Create a new assignment
             </summary>
-            <param x="assignment">
+            <param >
             assignment info
             </param>
         </member>
@@ -552,6 +549,19 @@
             <param name="userID">
             ID of the associated User
             </param>
+        </member>
+        <member name="M:web_site.Controllers.HomeController.test(System.Int32)">
+            <summary>
+            finds all assignments to a task and returns a 
+            list of usernames of users who are assigned to the task
+            </summary>
+            <param name="Id">
+            Id of the task
+            </param>
+            <returns>
+            a list of names or a list that contains a single string ("none")
+            if there are no users assigned to the task
+            </returns>
         </member>
         <member name="M:web_site.Controllers.TasksController.GetTasks">
             <summary>
@@ -578,7 +588,7 @@
             Create a new task
             </summary>
             <param name="task">
-            
+            task info
             </param>
         </member>
         <member name="M:web_site.Controllers.TasksController.DeleteTask(System.Int32)">
@@ -614,7 +624,7 @@
             Create a new User
             </summary>
             <param name="user">
-            
+            user info
             </param>
         </member>
         <member name="M:web_site.Controllers.UsersController.DeleteUser(System.Int32)">

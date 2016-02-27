@@ -27,9 +27,6 @@ using System.Collections.ObjectModel;
 
 namespace Lab2
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         public MainPage()
@@ -77,35 +74,13 @@ namespace Lab2
 
         private void TaskList_Click(object sender, RoutedEventArgs e)
         {
-            //var frame = this.DataContext as Frame;
-            //Page page = frame?.Content as Page;
-            //if (page?.GetType() != typeof(TaskList))
-            //{
-                this.Frame.Navigate(typeof(TaskList));
-            //}
+            this.Frame.Navigate(typeof(TaskList));
         }
 
         private async void taskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // when we get here the user has selected a customer
             Task1 selectedTask = taskList.SelectedItem as Task1;
-            //MessageBox.Show(selectedTask.Title + " is selected");
             this.Frame.Navigate(typeof(DetailsView),selectedTask);
-
-
-
-            //using (var client = new HttpClient())
-            //{
-            //    var response = "";
-            //    Task task = Task.Run(async () =>
-            //    {
-            //        response = await client.GetStringAsync(App.BaseUri + "api/tasks/" + selectedTask.TaskID); // sends GET request
-            //    });
-            //    task.Wait(); // Wait
-            //    Task1 list = JsonConvert.DeserializeObject<Task1>(response);
-            //    taskList.Items.Clear();
-            //    taskList.Items.Add(list);
-            //}
         }
 
         private void DoneTask_Click(object sender, RoutedEventArgs e)
@@ -113,8 +88,6 @@ namespace Lab2
             DateTime current = DateTime.Now;
 
             taskList.ItemsSource = null;
-
-
 
             List<Task1> list = App.tasks;
             List<Task1> temp = new List<Task1>();
@@ -127,13 +100,11 @@ namespace Lab2
                 }
             }
             taskList.ItemsSource = temp;
-
         }
 
         private void TaskNameSearch_Click(object sender, RoutedEventArgs e)
         {
             taskList.ItemsSource = null;
-
 
             if (TaskName.Text.Equals(""))
             {
@@ -159,8 +130,6 @@ namespace Lab2
         {
             taskList.ItemsSource = null;
 
-
-
             if (TaskName.Text.Equals(""))
             {
                 taskList.ItemsSource = App.tasks;
@@ -185,7 +154,6 @@ namespace Lab2
             DateTime start = StartPicker.Date.Date;
             DateTime deadline = DeadlinePicker.Date.Date;
 
-
             List<Task1> list = App.tasks;
             List<Task1> temp = new List<Task1>();
             foreach (Task1 task in list)
@@ -199,7 +167,6 @@ namespace Lab2
                 }
             }
             taskList.ItemsSource = temp;
-
         }
     }
 }

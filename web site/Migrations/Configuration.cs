@@ -17,13 +17,13 @@ namespace web_site.Migrations
         {
 
             context.Users.AddOrUpdate(x => x.UserID,
-                new User() { UserID = 1, FirstName = "Lennart", LastName = "Jakobsson"},
-                new User() { UserID = 2, FirstName = "Test", LastName = "Testsson" },
-                new User() { UserID = 3, FirstName = "Alexander", LastName = "Pihl" },
-                new User() { UserID = 4, FirstName = "Thora", LastName = "Rot" },
-                new User() { UserID = 5, FirstName = "Kieron", LastName = "Simon" },
-                new User() { UserID = 6, FirstName = "Fedya", LastName = "Coeman" },
-                new User() { UserID = 7, FirstName = "Israa", LastName = "Pinho" }
+                new User() { UserID = 1, FirstName = "Lennart",     LastName = "Jakobsson"},
+                new User() { UserID = 2, FirstName = "Test",        LastName = "Testsson" },
+                new User() { UserID = 3, FirstName = "Alexander",   LastName = "Pihl" },
+                new User() { UserID = 4, FirstName = "Thora",       LastName = "Rot" },
+                new User() { UserID = 5, FirstName = "Kieron",      LastName = "Simon" },
+                new User() { UserID = 6, FirstName = "Fedya",       LastName = "Coeman" },
+                new User() { UserID = 7, FirstName = "Israa",       LastName = "Pinho" }
             );
 
             context.Tasks.AddOrUpdate(x => x.TaskID, 
@@ -45,25 +45,15 @@ namespace web_site.Migrations
                     Requirements = "I don't know", Title = "SomeThing8" }
             );
 
-            var Assignments = new List<Assignment>
-            {
-               new Assignment {TaskID = 1, UserID = 1},
-               new Assignment {TaskID = 2, UserID = 2},
-               new Assignment {TaskID = 3, UserID = 1},
-               new Assignment {TaskID = 4, UserID = 3},
-               new Assignment {TaskID = 5, UserID = 2},
-               new Assignment {TaskID = 6, UserID = 1},
-               new Assignment {TaskID = 7, UserID = 3}
-            };
-            foreach (Assignment e in Assignments)
-            {
-                var enrollmentInDataBase = context.Assignments.Where(
-                    s => s.UserID == e.UserID && s.TaskID == e.TaskID);
-                if (enrollmentInDataBase == null)
-                {
-                    context.Assignments.Add(e);
-                }
-            }
+
+            context.Assignments.AddOrUpdate(p => new { p.TaskID,p.UserID }, new Assignment { TaskID = 1, UserID = 1 },
+               new Assignment { TaskID = 2, UserID = 2 },
+               new Assignment { TaskID = 3, UserID = 1 },
+               new Assignment { TaskID = 4, UserID = 3 },
+               new Assignment { TaskID = 5, UserID = 2 },
+               new Assignment { TaskID = 6, UserID = 1 },
+               new Assignment { TaskID = 7, UserID = 3 }
+               );
         }
     }
 }

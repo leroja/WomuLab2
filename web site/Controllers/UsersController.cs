@@ -86,7 +86,7 @@ namespace web_site.Controllers
         /// Create a new User
         /// </summary>
         /// <param name="user">
-        /// 
+        /// user info
         /// </param>
         // POST: api/Users
         [ResponseType(typeof(User))]

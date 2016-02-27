@@ -8,7 +8,6 @@ namespace Lab2.Models
 {
     class Assignment
     {
-
         public int UserID { get; set; }
         public int TaskID { get; set; }
     }
