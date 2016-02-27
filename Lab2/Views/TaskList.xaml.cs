@@ -47,10 +47,10 @@ namespace Lab2.Views
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Task1 task;
-            AssignmentDTO selectedTask = listBox.SelectedItem as AssignmentDTO;
+            AssignmentDTO selectedAssignment = listBox.SelectedItem as AssignmentDTO;
 
 
-            if (selectedTask == null)
+            if (selectedAssignment == null)
             {
                 return;
             }
@@ -60,7 +60,7 @@ namespace Lab2.Views
                 Task thtask = Task.Run(async () =>
                 {
 
-                    response = await client.GetStringAsync(App.BaseUri + "api/tasks/"+selectedTask.TaskID); // sends GET request
+                    response = await client.GetStringAsync(App.BaseUri + "api/tasks/"+selectedAssignment.TaskID); // sends GET request
                 });
                 thtask.Wait(); // Wait
                 task = JsonConvert.DeserializeObject<Task1>(response);
