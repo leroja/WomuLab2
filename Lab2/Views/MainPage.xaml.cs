@@ -191,7 +191,7 @@ namespace Lab2
             foreach (Task1 task in list)
             {
 
-                if (task.DeadlineDateTime > deadline && task.BeginDateTime > start)
+                if (task.DeadlineDateTime <= deadline && task.BeginDateTime >= start)
                 {
                     temp.Add(task);
                 }
