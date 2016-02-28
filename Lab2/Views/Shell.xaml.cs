@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 namespace Lab2.Views
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// plans for a menu that is on all frames
     /// </summary>
     public sealed partial class Shell : Page
     {
@@ -26,8 +26,6 @@ namespace Lab2.Views
         {
             this.InitializeComponent();
         }
-
-
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {

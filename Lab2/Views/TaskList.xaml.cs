@@ -32,7 +32,6 @@ namespace Lab2.Views
 
             listBox.ItemsSource = App.Assignments;
 
-            
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -47,29 +46,14 @@ namespace Lab2.Views
 
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Task1 task;
-            AssignmentDTO selectedTask = listBox.SelectedItem as AssignmentDTO;
+            AssignmentDTO selectedAssignment = listBox.SelectedItem as AssignmentDTO;
 
 
-            if (selectedTask == null)
+            if (selectedAssignment == null)
             {
                 return;
             }
-            using (var client = new HttpClient())
-            {
-                var response = "";
-                Task thtask = Task.Run(async () =>
-                {
-
-                    response = await client.GetStringAsync(App.BaseUri + "api/tasks/"+selectedTask.TaskID); // sends GET request
-                });
-                thtask.Wait(); // Wait
-                task = JsonConvert.DeserializeObject<Task1>(response);
-            }
-
-            
-
-            this.Frame.Navigate(typeof(TaskDetail),task);
+            this.Frame.Navigate(typeof(TaskDetail),selectedAssignment);
         }
     }
 }

@@ -20,29 +20,26 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Lab2.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class TaskDetail : Page
     {
 
-        private Task1 task;
+        private AssignmentDTO assignment;
         public TaskDetail()
         {
             this.InitializeComponent();
         }
 
-
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is Task1)
+            if (e.Parameter is AssignmentDTO)
             {
-                task = (Task1)e.Parameter;
-                Title.Text = "Task title: " + task.Title;
-                StartTime.Text = "Start time of Task: " + task.BeginDateTime.ToString();
-                Deadline.Text = "Dedline For Task: " + task.DeadlineDateTime.ToString();
-                Requirements.Text = "Requirements: " + task.Requirements;
+                assignment = (AssignmentDTO)e.Parameter;
+                Title.Text = "Task title: " + assignment.Title;
+                StartTime.Text = "Start time of Task: " + assignment.BeginDateTime.ToString();
+                Deadline.Text = "Dedline For Task: " + assignment.DeadlineDateTime.ToString();
+                Requirements.Text = "Requirements: " + assignment.Requirements;
+
+                Users.Text = "All Assigned users: \r\n" + String.Join(", ", ((List<string>)assignment.Users).ToArray()); ;
             }
 
         }
@@ -51,33 +48,26 @@ namespace Lab2.Views
         {
             using (var client = new HttpClient())
             {
-                var response = "";
                 Task thtask = Task.Run(async () =>
                 {
-                    
-                    await client.DeleteAsync(App.BaseUri + "api/assignments?taskID=" + task.TaskID + "&userID=" + App.user.UserID);
-                    //response = await client.GetStringAsync(App.BaseUri + "api/tasks"); // sends GET request
+                    await client.DeleteAsync(App.BaseUri + "api/assignments?taskID=" + assignment.TaskID + "&userID=" + App.user.UserID);
                 });
                 thtask.Wait(); // Wait
             }
 
-            var delTemp = App.Assignments.Where(x => x.TaskID == task.TaskID && x.UserID == App.user.UserID);
+            var delTemp = App.Assignments.Where(x => x.TaskID == assignment.TaskID);
 
             AssignmentDTO del = delTemp.FirstOrDefault();
-
-            // remove from assignments list
 
             App.Assignments.Remove(del);
 
 
-            //this.Frame.GoBack();
-            this.Frame.Navigate(typeof(TaskList));
+            this.Frame.GoBack();
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.GoBack();
-            //this.Frame.Navigate(typeof(TaskList));
         }
     }
 }

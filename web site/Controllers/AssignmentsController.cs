@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using web_site.Models;
+using web_site.ViewModels;
 
 namespace web_site.Controllers
 {
@@ -23,79 +24,75 @@ namespace web_site.Controllers
         public IQueryable<AssignmentDTO> GetAssignments()
         {
 
-
             var Assignments = from a in db.Assignments
-                        select new AssignmentDTO()
-                        {
-                            TaskID = a.TaskID,
-                            TaskTitle = a.Task.Title,
-                            UserID = a.UserID,
-                            UserForName = a.User.FirstName,
-                            UserLastName = a.User.LastName
-
-                        };
+                              select new AssignmentDTO()
+                              {
+                                  TaskID = a.TaskID,
+                                  Title = a.Task.Title,
+                                  BeginDateTime = a.Task.BeginDateTime,
+                                  DeadlineDateTime = a.Task.DeadlineDateTime,
+                                  Requirements = a.Task.Requirements
+                              };
+            foreach (var item in Assignments)
+            {
+                item.Users = test(item.TaskID);
+            }
 
             return Assignments;
 
         }
 
         /// <summary>
-        /// 
+        /// finds and return the names of all users assigned to a task 
         /// </summary>
         /// <param name="TaskID">
-        /// 
+        /// Id of task
         /// </param>
-        /// <returns>
-        /// 
-        /// </returns>
         // GET: api/Assignments/1
-        [ResponseType(typeof(AssignmentDTO))]
-        public IQueryable<AssignmentDTO> GetStatus(int TaskID)
+        [ResponseType(typeof(string))]
+        public IQueryable<string> GetStatus(int TaskID)
         {
 
+            List<string> t = test(TaskID);
 
-            var Assignments = from a in db.Assignments where a.TaskID == TaskID
-                                select new AssignmentDTO()
-                                {
-                                    TaskID = a.TaskID,
-                                    TaskTitle = a.Task.Title,
-                                    UserID = a.UserID,
-                                    UserForName = a.User.FirstName,
-                                    UserLastName = a.User.LastName
 
-                                };
-
-            return Assignments;
-
+            return t.AsQueryable();
         }
+
         /// <summary>
-        /// 
+        /// gets all assignments that belong to a specific user
         /// </summary>
         /// <param name="UserID">
-        /// 
+        /// Id of user
         /// </param>
-        /// <returns>
-        /// 
-        /// </returns>
+        /// // GET: api/Assignments/1
         [ResponseType(typeof(AssignmentDTO))]
         public IQueryable<AssignmentDTO> GetUserAssignments(int UserID)
         {
-
-
+            
             var Assignments = from a in db.Assignments
                               where a.UserID == UserID
                               select new AssignmentDTO()
                               {
                                   TaskID = a.TaskID,
-                                  TaskTitle = a.Task.Title,
-                                  UserID = a.UserID,
-                                  UserForName = a.User.FirstName,
-                                  UserLastName = a.User.LastName
-                              };
+                                  Title = a.Task.Title,
+                                  BeginDateTime = a.Task.BeginDateTime,
+                                  DeadlineDateTime = a.Task.DeadlineDateTime,
+                                  Requirements = a.Task.Requirements
+                            };
 
-            return Assignments;
+            List<AssignmentDTO> tet = Assignments.ToList();
 
+            foreach (var item in tet)
+            {
+                item.Users = test(item.TaskID);
+            }
+
+            return tet.AsQueryable<AssignmentDTO>();
+            //return Assignments;
         }
+
+
 
         /// <summary>
         /// Looks up some Assignment by TaskID and UserID.
@@ -107,25 +104,24 @@ namespace web_site.Controllers
         /// ID of the associated User
         /// </param>
         /// <returns></returns>
-
         // GET: api/Assignments/5
         [ResponseType(typeof(AssignmentDTO))]
-        public IHttpActionResult GetAssignment(int taskID,int userID)
+        public IHttpActionResult GetAssignment(int taskID, int userID)
         {
-
-            //Assignment assignment = db.Assignments.Find(taskID, userID);
-
 
             var Ass = db.Assignments.Find(taskID, userID);
 
             AssignmentDTO assignmentDTO = new AssignmentDTO
             {
                 TaskID = Ass.TaskID,
-                TaskTitle = Ass.Task.Title,
-                UserID = Ass.UserID,
-                UserForName = Ass.User.FirstName,
-                UserLastName = Ass.User.LastName
+                Title = Ass.Task.Title,
+                BeginDateTime = Ass.Task.BeginDateTime,
+                DeadlineDateTime = Ass.Task.DeadlineDateTime,
+                Requirements = Ass.Task.Requirements,
+                Users = test(Ass.TaskID)
             };
+
+
 
             if (assignmentDTO == null)
             {
@@ -185,7 +181,7 @@ namespace web_site.Controllers
         /// <summary>
         /// Create a new assignment
         /// </summary>
-        /// <param x="assignment">
+        /// <param >
         /// assignment info
         /// </param>
         // POST: api/Assignments
@@ -213,28 +209,6 @@ namespace web_site.Controllers
                 return Ok("added in db");
             }
         }
-        //    }
-
-        //    //db.Assignments.Add(assignment);
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //       // if (AssignmentExists(assignment.TaskID,assignment.UserID))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtRoute("DefaultApi", new { id = assignment.TaskID }, assignment);
-        //}
 
         /// <summary>
         /// Delete an assignment
@@ -273,6 +247,43 @@ namespace web_site.Controllers
         private bool AssignmentExists(int taskID, int userID)
         {
             return db.Assignments.Count(e => e.TaskID == taskID && e.UserID == userID) > 0;
+        }
+
+
+        /// <summary>
+        /// finds all assignments to a task and returns a 
+        /// list of usernames of users who are assigned to the task
+        /// </summary>
+        /// <param name="Id">
+        /// Id of the task
+        /// </param>
+        /// <returns>
+        /// a list of names or a list that contains a single string ("none")
+        /// if there are no users assigned to the task
+        /// </returns>
+        private List<string> test(int Id)
+        {
+            var t = db.Assignments.Where(a => a.TaskID == Id);
+            var s = t.ToList();
+            List<string> users = new List<string>();
+
+            if (s.Count() == 0)
+            {
+                List<string> a = new List<string>();
+                a.Add("None");
+                return a;
+            }
+
+            foreach (var item in s)
+            {
+                string first = item.User.FirstName;
+                string last = item.User.LastName;
+
+                string name = first + " " + last;
+                users.Add(name);
+            }
+
+            return users;
         }
     }
 }
